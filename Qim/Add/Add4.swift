@@ -1,42 +1,42 @@
 //
-//  Home1.swift
+//  Add4.swift
 //  Qim
 //
-//  Created by Badreah Saad on 13/01/2022.
+//  Created by Badreah Saad on 16/01/2022.
 //
 
 import UIKit
 
-class Home1: UIViewController {
+class Add4: UIViewController {
 
-
+    
     @IBOutlet weak var subcategory: UICollectionView!
     
     let categoryBran1 = UITableView()
     let categoryBran2 = UITableView()
     let categoryBran3 = UITableView()
     let categoryBran4 = UITableView()
-   
-    var subcategorys1 = [
-        Subcategorys1(name: "DishWasher"),
-        Subcategorys1(name: "washing"),
-        Subcategorys1(name: "air"),
-        Subcategorys1(name: "heater")
+    
+    var addsubcategorys4 = [
+        Addsubcategorys4(name: "one"),
+        Addsubcategorys4(name: "two"),
+        Addsubcategorys4(name: "three"),
+        Addsubcategorys4(name: "four")
     ]
     
     var categorysBran1 = [
-      "DishWasher1","DishWasher2","DishWasher3","DishWasher4"
+      "one1","one2","one3","one4"
     ]
     var categorysBran2 = [
-      "washing1","washing2","washing3","washing"
+      "two1","two2","two3","two4"
     ]
     
     var categorysBran3 = [
-      "air1","air2","air3","air4"
+      "three1","three2","three3","three4"
     ]
     
     var categorysBran4 = [
-      "heater1","heater2","heater3","heater4"
+      "four1","four2","four3","four4"
     ]
     
     
@@ -54,7 +54,7 @@ class Home1: UIViewController {
         categoryBran3.dataSource = self
         categoryBran4.delegate = self
         categoryBran4.dataSource = self
-       
+
                 
         categoryBran2.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran2.delegate = self
@@ -64,6 +64,9 @@ class Home1: UIViewController {
         categoryBran2.rowHeight = 70
         categoryBran2.layer.cornerRadius = 10
         categoryBran2.layer.masksToBounds = true
+        categoryBran2.backgroundColor = .white
+
+
         
         categoryBran3.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran3.delegate = self
@@ -73,7 +76,9 @@ class Home1: UIViewController {
         categoryBran3.rowHeight = 70
         categoryBran3.layer.cornerRadius = 10
         categoryBran3.layer.masksToBounds = true
-       
+        categoryBran3.backgroundColor = .white
+
+        
         
         categoryBran4.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran4.delegate = self
@@ -83,8 +88,8 @@ class Home1: UIViewController {
         categoryBran4.rowHeight = 70
         categoryBran4.layer.cornerRadius = 10
         categoryBran4.layer.masksToBounds = true
-       
-        
+        categoryBran4.backgroundColor = .white
+
         categoryBran1.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran1.delegate = self
         categoryBran1.dataSource = self
@@ -93,7 +98,7 @@ class Home1: UIViewController {
         categoryBran1.rowHeight = 70
         categoryBran1.layer.cornerRadius = 10
         categoryBran1.layer.masksToBounds = true
-       
+        categoryBran1.backgroundColor = .white
 
        
     }
@@ -102,7 +107,6 @@ class Home1: UIViewController {
         super.loadView()
         
         view.addSubview(categoryBran2)
-        categoryBran2.backgroundColor = .white
         categoryBran2.translatesAutoresizingMaskIntoConstraints = false
         categoryBran2.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
@@ -110,7 +114,6 @@ class Home1: UIViewController {
         categoryBran2.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
         
         view.addSubview(categoryBran3)
-        categoryBran3.backgroundColor = .white
         categoryBran3.translatesAutoresizingMaskIntoConstraints = false
         categoryBran3.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran3.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
@@ -118,7 +121,6 @@ class Home1: UIViewController {
         categoryBran3.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
         
         view.addSubview(categoryBran4)
-        categoryBran4.backgroundColor = .white
         categoryBran4.translatesAutoresizingMaskIntoConstraints = false
         categoryBran4.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran4.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
@@ -126,7 +128,6 @@ class Home1: UIViewController {
         categoryBran4.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
         
         view.addSubview(categoryBran1)
-        categoryBran1.backgroundColor = .white
         categoryBran1.translatesAutoresizingMaskIntoConstraints = false
         categoryBran1.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
@@ -138,7 +139,7 @@ class Home1: UIViewController {
 }
 
 
-extension Home1: UITableViewDelegate, UITableViewDataSource {
+extension Add4: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == categoryBran4 {
@@ -146,7 +147,7 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == categoryBran2 {
             return categorysBran2.count
         } else if tableView == categoryBran3 {
-            return categorysBran3.count
+            return categorysBran2.count
         } else {
             return categorysBran1.count
         }
@@ -177,23 +178,21 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showEX", sender: self)
+    performSegue(withIdentifier: "ex", sender: self)
     }
-    
-    
     
 }
 
 
-extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
+extension Add4: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subcategorys1.count
+        return addsubcategorys4.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = subcategory.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! CollectionViewCell
-        cell.subCategoryName.text = subcategorys1[indexPath.row].name
+        cell.subCategoryName.text = addsubcategorys4[indexPath.row].name
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -230,6 +229,8 @@ extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 
-struct Subcategorys1 {
+struct Addsubcategorys4 {
     var name: String
 }
+
+

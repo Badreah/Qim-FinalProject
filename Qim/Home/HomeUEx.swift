@@ -10,56 +10,41 @@ import Firebase
 
 class HomeUEx: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let backButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 50))
+   
 
-
-    let myTabel = UITableView()
+    @IBOutlet weak var allEx: UITableView!
+    
     
     let db = Firestore.firestore()
-    
-    var allAraay = [allEX]()
+    let userID = Auth.auth().currentUser?.uid
+    var allExAraay = [AllEX]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemGray
-        view.addSubview(myTabel)
-        
-        myTabel.register(UExCell.self, forCellReuseIdentifier: "cell")
-        myTabel.delegate = self
-        myTabel.dataSource = self
-        myTabel.allowsSelection = true
-        myTabel.isUserInteractionEnabled = true
-        myTabel.rowHeight = 70
-        myTabel.backgroundColor = .white
-        
-        view.addSubview(backButton)
-        
-        backButton.setTitleColor(.black, for: .normal)
-        backButton.setTitle("<", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Helvetica", size: 30)
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
-
+                
+        allEx.delegate = self
+        allEx.dataSource = self
+//        allEx.allowsSelection = true
+//        allEx.isUserInteractionEnabled = true
+        allEx.rowHeight = 100
+        allEx.backgroundColor = .white
+        allEx.layer.cornerRadius = 10
+        allEx.layer.masksToBounds = true
+       
         loadAllEX()
         
     }
     
     override func loadView() {
         super.loadView()
-        view.addSubview(myTabel)
-        myTabel.translatesAutoresizingMaskIntoConstraints = false
-        myTabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
-        myTabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
-        myTabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100.0).isActive = true
-        myTabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
+        allEx.translatesAutoresizingMaskIntoConstraints = false
+        allEx.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
+        allEx.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20.0).isActive = true
+        allEx.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100.0).isActive = true
+        allEx.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20.0).isActive = true
     }
     
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
-    }
+  
 
     
 //    db.collection("New EX").addDocument(data: [
@@ -90,41 +75,74 @@ class HomeUEx: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //    }
     
     func loadAllEX() {
-    db.collection("NewEX").getDocuments { [self]
-        (snapShot, error) in
-        if let error = error {
-            print("!!",error.localizedDescription)
-        } else {
-            for doc in snapShot!.documents {
-                let data = doc.data()
-                let newUser = allEX(productname: data["productName"] as? String ?? "no pro")
-                self.allAraay.append(newUser)
-                print(newUser)
+        db.collection("NewEX").getDocuments { [self]
+            (snapShot, error) in
+            if let error = error {
+                print("!!",error.localizedDescription)
+            } else {
+                for doc in snapShot!.documents {
+                    let data = doc.data()
+                    let newUser = AllEX(name: data["UserName"] as? String ?? "no na",
+                                        userImage: data["UserImage"] as? String ?? "no img",
+                                        productname: data["productName"] as? String ?? "no product",
+                                        opinion: data["opi"] as? String ?? "no opi")
+                    self.allExAraay.append(newUser)
+                    print(newUser)
+                }
+                self.allEx.reloadData()
             }
-            self.myTabel.reloadData()
         }
     }
+    
+    @objc func shareToButton() {
+        let c = ProfileVCCell()
+        let activityVC = UIActivityViewController(activityItems: [c.titleLabel.text!], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = view
+        print("!! share !!")
+        present(activityVC, animated: true, completion: nil)
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allAraay.count
+        return allExAraay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = myTabel.dequeueReusableCell(withIdentifier: "cell") as! UExCell
-        cell.titleLabel.text = allAraay[indexPath.row].productname
+        let cell = allEx.dequeueReusableCell(withIdentifier: "cell") as! UExCell
+        cell.productName.text = allExAraay[indexPath.row].productname
+        cell.userName.text = allExAraay[indexPath.row].name
+        
+        cell.share.addTarget(self, action: #selector(shareToButton), for: .touchUpInside)
+        
+        let imgStr = allExAraay[indexPath.row].userImage
+        let url = "gs://qim-4f02d.appspot.com/images/" + "\(imgStr)"
+        let ref = Storage.storage().reference(forURL: url)
+        ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                print("no image download")
+            } else {
+                cell.userImage.image = UIImage(data: data!)
+            }
+        }
+        
+        cell.userImage.contentMode = .scaleAspectFill
+        cell.userImage.layer.cornerRadius = cell.userImage.frame.width/2
+        cell.userImage.clipsToBounds = true
+        cell.backgroundColor = .white
 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "exContent", sender: self)
+    }
     
 
 }
 
 
-struct allEX {
-//    var name: String
-//    var userImage: UIImage
+struct AllEX {
+    var name: String
+    var userImage: String
     var productname: String
+    var opinion: String
 }

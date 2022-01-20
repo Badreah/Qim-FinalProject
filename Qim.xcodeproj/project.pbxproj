@@ -30,14 +30,24 @@
 		9830BBB227904DD200BE2AFB /* HomeUEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBB127904DD200BE2AFB /* HomeUEx.swift */; };
 		9830BBB427904DEB00BE2AFB /* UExCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBB327904DEB00BE2AFB /* UExCell.swift */; };
 		9830BBB627904E0300BE2AFB /* HomeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBB527904E0300BE2AFB /* HomeEx.swift */; };
-		9830BBB92790599D00BE2AFB /* AddHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBB82790599D00BE2AFB /* AddHome.swift */; };
-		9830BBBB27905C2600BE2AFB /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBBA27905C2600BE2AFB /* CatCell.swift */; };
-		9830BBBD27905C3500BE2AFB /* DevCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBBC27905C3500BE2AFB /* DevCell.swift */; };
-		9830BBBF27905C3D00BE2AFB /* BrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBBE27905C3D00BE2AFB /* BrCell.swift */; };
 		9830BBC227905FFB00BE2AFB /* LikeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBC127905FFB00BE2AFB /* LikeVC.swift */; };
 		9830BBC42790600F00BE2AFB /* LikeVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBC32790600F00BE2AFB /* LikeVCCell.swift */; };
 		9830BBC72790603700BE2AFB /* TopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBC62790603700BE2AFB /* TopVC.swift */; };
 		9830BBC92790604C00BE2AFB /* TopVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBC82790604C00BE2AFB /* TopVCCell.swift */; };
+		9830BBCD27908ADD00BE2AFB /* Home2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBCC27908ADD00BE2AFB /* Home2.swift */; };
+		9830BBCF27908D5600BE2AFB /* Home3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBCE27908D5600BE2AFB /* Home3.swift */; };
+		9830BBD127908D5E00BE2AFB /* Home4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBD027908D5E00BE2AFB /* Home4.swift */; };
+		9830BBD32790A41C00BE2AFB /* AddHome-P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBD22790A41C00BE2AFB /* AddHome-P.swift */; };
+		9830BBD62790A58400BE2AFB /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBD52790A58400BE2AFB /* AddCell.swift */; };
+		9830BBD82790A5E100BE2AFB /* Add1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBD72790A5E100BE2AFB /* Add1.swift */; };
+		9830BBDA2790A5EA00BE2AFB /* Add2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBD92790A5EA00BE2AFB /* Add2.swift */; };
+		9830BBDC2790AC7600BE2AFB /* AddEX1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBDB2790AC7600BE2AFB /* AddEX1.swift */; };
+		9830BBE02794AA9C00BE2AFB /* Add3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBDF2794AA9C00BE2AFB /* Add3.swift */; };
+		9830BBE22794ABE800BE2AFB /* Add4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE12794ABE800BE2AFB /* Add4.swift */; };
+		9830BBE527967F6C00BE2AFB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9830BBE427967F6C00BE2AFB /* FirebaseDatabase */; };
+		9830BBE72796B09B00BE2AFB /* LikeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE62796B09B00BE2AFB /* LikeEx.swift */; };
+		9830BBE92796B0ED00BE2AFB /* TopEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE82796B0ED00BE2AFB /* TopEx.swift */; };
+		9830BBEB2796C33D00BE2AFB /* UserEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBEA2796C33C00BE2AFB /* UserEx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,14 +73,23 @@
 		9830BBB127904DD200BE2AFB /* HomeUEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUEx.swift; sourceTree = "<group>"; };
 		9830BBB327904DEB00BE2AFB /* UExCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UExCell.swift; sourceTree = "<group>"; };
 		9830BBB527904E0300BE2AFB /* HomeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEx.swift; sourceTree = "<group>"; };
-		9830BBB82790599D00BE2AFB /* AddHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHome.swift; sourceTree = "<group>"; };
-		9830BBBA27905C2600BE2AFB /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
-		9830BBBC27905C3500BE2AFB /* DevCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevCell.swift; sourceTree = "<group>"; };
-		9830BBBE27905C3D00BE2AFB /* BrCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrCell.swift; sourceTree = "<group>"; };
 		9830BBC127905FFB00BE2AFB /* LikeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeVC.swift; sourceTree = "<group>"; };
 		9830BBC32790600F00BE2AFB /* LikeVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeVCCell.swift; sourceTree = "<group>"; };
 		9830BBC62790603700BE2AFB /* TopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVC.swift; sourceTree = "<group>"; };
 		9830BBC82790604C00BE2AFB /* TopVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVCCell.swift; sourceTree = "<group>"; };
+		9830BBCC27908ADD00BE2AFB /* Home2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home2.swift; sourceTree = "<group>"; };
+		9830BBCE27908D5600BE2AFB /* Home3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home3.swift; sourceTree = "<group>"; };
+		9830BBD027908D5E00BE2AFB /* Home4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home4.swift; sourceTree = "<group>"; };
+		9830BBD22790A41C00BE2AFB /* AddHome-P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHome-P.swift"; sourceTree = "<group>"; };
+		9830BBD52790A58400BE2AFB /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
+		9830BBD72790A5E100BE2AFB /* Add1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add1.swift; sourceTree = "<group>"; };
+		9830BBD92790A5EA00BE2AFB /* Add2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add2.swift; sourceTree = "<group>"; };
+		9830BBDB2790AC7600BE2AFB /* AddEX1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEX1.swift; sourceTree = "<group>"; };
+		9830BBDF2794AA9C00BE2AFB /* Add3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add3.swift; sourceTree = "<group>"; };
+		9830BBE12794ABE800BE2AFB /* Add4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add4.swift; sourceTree = "<group>"; };
+		9830BBE62796B09B00BE2AFB /* LikeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeEx.swift; sourceTree = "<group>"; };
+		9830BBE82796B0ED00BE2AFB /* TopEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEx.swift; sourceTree = "<group>"; };
+		9830BBEA2796C33C00BE2AFB /* UserEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEx.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +99,7 @@
 			files = (
 				9830BB97279044A600BE2AFB /* FirebaseAuth in Frameworks */,
 				9830BB99279044A600BE2AFB /* FirebaseFirestore in Frameworks */,
+				9830BBE527967F6C00BE2AFB /* FirebaseDatabase in Frameworks */,
 				9830BB9B279044A600BE2AFB /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +112,7 @@
 			children = (
 				9830BB7B2790444C00BE2AFB /* Qim */,
 				9830BB7A2790444C00BE2AFB /* Products */,
+				9830BBE327967F6C00BE2AFB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +157,7 @@
 			children = (
 				9830BB802790444C00BE2AFB /* ProfileVc.swift */,
 				9830BB9C2790466A00BE2AFB /* ProfileVCCell.swift */,
+				9830BBEA2796C33C00BE2AFB /* UserEx.swift */,
 				9830BB9E2790468B00BE2AFB /* LoginVC.swift */,
 				9830BBA0279046A100BE2AFB /* ForgotPassVC.swift */,
 				9830BBA2279046B400BE2AFB /* SignUPVC.swift */,
@@ -149,6 +171,9 @@
 				9830BBA72790473300BE2AFB /* HomeCateogry.swift */,
 				9830BBA92790474A00BE2AFB /* HomeCell.swift */,
 				9830BBAB2790482300BE2AFB /* Home1.swift */,
+				9830BBCC27908ADD00BE2AFB /* Home2.swift */,
+				9830BBCE27908D5600BE2AFB /* Home3.swift */,
+				9830BBD027908D5E00BE2AFB /* Home4.swift */,
 				9830BBAD2790494D00BE2AFB /* TableViewCell.swift */,
 				9830BBAF2790496000BE2AFB /* CollectionViewCell.swift */,
 				9830BBB127904DD200BE2AFB /* HomeUEx.swift */,
@@ -161,10 +186,13 @@
 		9830BBB7279057EB00BE2AFB /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				9830BBB82790599D00BE2AFB /* AddHome.swift */,
-				9830BBBA27905C2600BE2AFB /* CatCell.swift */,
-				9830BBBC27905C3500BE2AFB /* DevCell.swift */,
-				9830BBBE27905C3D00BE2AFB /* BrCell.swift */,
+				9830BBD22790A41C00BE2AFB /* AddHome-P.swift */,
+				9830BBD52790A58400BE2AFB /* AddCell.swift */,
+				9830BBD72790A5E100BE2AFB /* Add1.swift */,
+				9830BBD92790A5EA00BE2AFB /* Add2.swift */,
+				9830BBDF2794AA9C00BE2AFB /* Add3.swift */,
+				9830BBE12794ABE800BE2AFB /* Add4.swift */,
+				9830BBDB2790AC7600BE2AFB /* AddEX1.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -174,6 +202,7 @@
 			children = (
 				9830BBC127905FFB00BE2AFB /* LikeVC.swift */,
 				9830BBC32790600F00BE2AFB /* LikeVCCell.swift */,
+				9830BBE62796B09B00BE2AFB /* LikeEx.swift */,
 			);
 			path = Like;
 			sourceTree = "<group>";
@@ -183,8 +212,16 @@
 			children = (
 				9830BBC62790603700BE2AFB /* TopVC.swift */,
 				9830BBC82790604C00BE2AFB /* TopVCCell.swift */,
+				9830BBE82796B0ED00BE2AFB /* TopEx.swift */,
 			);
 			path = Top;
+			sourceTree = "<group>";
+		};
+		9830BBE327967F6C00BE2AFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +244,7 @@
 				9830BB96279044A600BE2AFB /* FirebaseAuth */,
 				9830BB98279044A600BE2AFB /* FirebaseFirestore */,
 				9830BB9A279044A600BE2AFB /* FirebaseStorage */,
+				9830BBE427967F6C00BE2AFB /* FirebaseDatabase */,
 			);
 			productName = Qim;
 			productReference = 9830BB792790444C00BE2AFB /* Qim.app */;
@@ -269,28 +307,37 @@
 			files = (
 				9830BBA3279046B400BE2AFB /* SignUPVC.swift in Sources */,
 				9830BBB227904DD200BE2AFB /* HomeUEx.swift in Sources */,
+				9830BBE92796B0ED00BE2AFB /* TopEx.swift in Sources */,
+				9830BBCD27908ADD00BE2AFB /* Home2.swift in Sources */,
 				9830BB9D2790466A00BE2AFB /* ProfileVCCell.swift in Sources */,
 				9830BB812790444C00BE2AFB /* ProfileVc.swift in Sources */,
-				9830BBBD27905C3500BE2AFB /* DevCell.swift in Sources */,
 				9830BBA1279046A100BE2AFB /* ForgotPassVC.swift in Sources */,
-				9830BBB92790599D00BE2AFB /* AddHome.swift in Sources */,
-				9830BBBF27905C3D00BE2AFB /* BrCell.swift in Sources */,
+				9830BBEB2796C33D00BE2AFB /* UserEx.swift in Sources */,
+				9830BBE22794ABE800BE2AFB /* Add4.swift in Sources */,
 				9830BBAA2790474A00BE2AFB /* HomeCell.swift in Sources */,
 				9830BB9F2790468B00BE2AFB /* LoginVC.swift in Sources */,
+				9830BBE02794AA9C00BE2AFB /* Add3.swift in Sources */,
 				9830BBA82790473300BE2AFB /* HomeCateogry.swift in Sources */,
 				9830BB7D2790444C00BE2AFB /* AppDelegate.swift in Sources */,
-				9830BBBB27905C2600BE2AFB /* CatCell.swift in Sources */,
 				9830BBB02790496000BE2AFB /* CollectionViewCell.swift in Sources */,
 				9830BBC227905FFB00BE2AFB /* LikeVC.swift in Sources */,
 				9830BB7F2790444C00BE2AFB /* SceneDelegate.swift in Sources */,
+				9830BBD62790A58400BE2AFB /* AddCell.swift in Sources */,
+				9830BBDA2790A5EA00BE2AFB /* Add2.swift in Sources */,
 				9830BBB427904DEB00BE2AFB /* UExCell.swift in Sources */,
 				9830BBAE2790494D00BE2AFB /* TableViewCell.swift in Sources */,
 				9830BBB627904E0300BE2AFB /* HomeEx.swift in Sources */,
+				9830BBCF27908D5600BE2AFB /* Home3.swift in Sources */,
+				9830BBD32790A41C00BE2AFB /* AddHome-P.swift in Sources */,
 				9830BBC42790600F00BE2AFB /* LikeVCCell.swift in Sources */,
 				9830BBAC2790482300BE2AFB /* Home1.swift in Sources */,
 				9830BBC72790603700BE2AFB /* TopVC.swift in Sources */,
+				9830BBD127908D5E00BE2AFB /* Home4.swift in Sources */,
 				9830BBC92790604C00BE2AFB /* TopVCCell.swift in Sources */,
 				9830BB872790444C00BE2AFB /* Qim.xcdatamodeld in Sources */,
+				9830BBE72796B09B00BE2AFB /* LikeEx.swift in Sources */,
+				9830BBDC2790AC7600BE2AFB /* AddEX1.swift in Sources */,
+				9830BBD82790A5E100BE2AFB /* Add1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +582,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9830BB95279044A600BE2AFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		9830BBE427967F6C00BE2AFB /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9830BB95279044A600BE2AFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 

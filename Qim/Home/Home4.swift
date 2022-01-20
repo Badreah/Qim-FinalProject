@@ -1,5 +1,5 @@
 //
-//  Home1.swift
+//  home4.swift
 //  Qim
 //
 //  Created by Badreah Saad on 13/01/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Home1: UIViewController {
+class Home4: UIViewController {
 
 
     @IBOutlet weak var subcategory: UICollectionView!
@@ -16,27 +16,27 @@ class Home1: UIViewController {
     let categoryBran2 = UITableView()
     let categoryBran3 = UITableView()
     let categoryBran4 = UITableView()
-   
-    var subcategorys1 = [
-        Subcategorys1(name: "DishWasher"),
-        Subcategorys1(name: "washing"),
-        Subcategorys1(name: "air"),
-        Subcategorys1(name: "heater")
+
+    var subcategorys4 = [
+        Subcategorys4(name: "one"),
+        Subcategorys4(name: "two"),
+        Subcategorys4(name: "three"),
+        Subcategorys4(name: "four")
     ]
     
     var categorysBran1 = [
-      "DishWasher1","DishWasher2","DishWasher3","DishWasher4"
+      "one1","one2","one3","one4"
     ]
     var categorysBran2 = [
-      "washing1","washing2","washing3","washing"
+      "two1","v2","two3","two4"
     ]
     
     var categorysBran3 = [
-      "air1","air2","air3","air4"
+      "v1","v2","three3","three4"
     ]
     
     var categorysBran4 = [
-      "heater1","heater2","heater3","heater4"
+      "four1","four2","four3","four4"
     ]
     
     
@@ -64,7 +64,7 @@ class Home1: UIViewController {
         categoryBran2.rowHeight = 70
         categoryBran2.layer.cornerRadius = 10
         categoryBran2.layer.masksToBounds = true
-        
+       
         categoryBran3.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran3.delegate = self
         categoryBran3.dataSource = self
@@ -74,7 +74,6 @@ class Home1: UIViewController {
         categoryBran3.layer.cornerRadius = 10
         categoryBran3.layer.masksToBounds = true
        
-        
         categoryBran4.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran4.delegate = self
         categoryBran4.dataSource = self
@@ -84,7 +83,6 @@ class Home1: UIViewController {
         categoryBran4.layer.cornerRadius = 10
         categoryBran4.layer.masksToBounds = true
        
-        
         categoryBran1.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran1.delegate = self
         categoryBran1.dataSource = self
@@ -94,7 +92,6 @@ class Home1: UIViewController {
         categoryBran1.layer.cornerRadius = 10
         categoryBran1.layer.masksToBounds = true
        
-
        
     }
 
@@ -138,7 +135,7 @@ class Home1: UIViewController {
 }
 
 
-extension Home1: UITableViewDelegate, UITableViewDataSource {
+extension Home4: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == categoryBran4 {
@@ -178,6 +175,7 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showEX", sender: self)
+
     }
     
     
@@ -185,15 +183,15 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
+extension Home4: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subcategorys1.count
+        return subcategorys4.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = subcategory.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! CollectionViewCell
-        cell.subCategoryName.text = subcategorys1[indexPath.row].name
+        cell.subCategoryName.text = subcategorys4[indexPath.row].name
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -230,6 +228,7 @@ extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 
-struct Subcategorys1 {
+struct Subcategorys4 {
     var name: String
 }
+

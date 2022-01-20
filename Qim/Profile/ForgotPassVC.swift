@@ -11,7 +11,7 @@ import Firebase
 class ForgotPassVC: UIViewController {
     
     let resetEmail = UITextField(frame: CGRect(x: 60, y: 300, width: 300, height: 50))
-    let resetButton = UIButton(frame: CGRect(x: 150, y: 500, width: 100, height: 50))
+    let resetButton = UIButton(frame: CGRect(x: 150, y: 500, width: 200, height: 50))
     let backButton = UIButton(frame: CGRect(x: 10, y: 50, width: 50, height: 50))
  
     override func viewDidLoad() {
@@ -20,11 +20,13 @@ class ForgotPassVC: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(resetEmail)
-        resetEmail.placeholder = "  Email"
+        resetEmail.placeholder = "البريد الالكتروني"
         resetEmail.backgroundColor = .systemGray
+        resetEmail.textAlignment = .right
+        resetEmail.layer.cornerRadius = 10
         
         view.addSubview(resetButton)
-        resetButton.setTitle("Reset", for: .normal)
+        resetButton.setTitle("اعادة تعيين كلمة المرور", for: .normal)
         resetButton.setTitleColor(.black, for: .normal)
         resetButton.backgroundColor = .white
         resetButton.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)

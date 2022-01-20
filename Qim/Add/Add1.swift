@@ -1,5 +1,5 @@
 //
-//  Home1.swift
+//  Add1.swift
 //  Qim
 //
 //  Created by Badreah Saad on 13/01/2022.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class Home1: UIViewController {
+class Add1: UIViewController {
 
-
+    
     @IBOutlet weak var subcategory: UICollectionView!
     
     let categoryBran1 = UITableView()
@@ -17,11 +17,11 @@ class Home1: UIViewController {
     let categoryBran3 = UITableView()
     let categoryBran4 = UITableView()
    
-    var subcategorys1 = [
-        Subcategorys1(name: "DishWasher"),
-        Subcategorys1(name: "washing"),
-        Subcategorys1(name: "air"),
-        Subcategorys1(name: "heater")
+    var addSubcategorys1 = [
+        AddSubcategorys1(name: "DishWasher"),
+        AddSubcategorys1(name: "washing"),
+        AddSubcategorys1(name: "air"),
+        AddSubcategorys1(name: "heater")
     ]
     
     var categorysBran1 = [
@@ -73,7 +73,6 @@ class Home1: UIViewController {
         categoryBran3.rowHeight = 70
         categoryBran3.layer.cornerRadius = 10
         categoryBran3.layer.masksToBounds = true
-       
         
         categoryBran4.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran4.delegate = self
@@ -83,7 +82,6 @@ class Home1: UIViewController {
         categoryBran4.rowHeight = 70
         categoryBran4.layer.cornerRadius = 10
         categoryBran4.layer.masksToBounds = true
-       
         
         categoryBran1.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran1.delegate = self
@@ -94,16 +92,15 @@ class Home1: UIViewController {
         categoryBran1.layer.cornerRadius = 10
         categoryBran1.layer.masksToBounds = true
        
-
-       
     }
 
     override func loadView() {
         super.loadView()
         
+        
         view.addSubview(categoryBran2)
         categoryBran2.backgroundColor = .white
-        categoryBran2.translatesAutoresizingMaskIntoConstraints = false
+ categoryBran2.translatesAutoresizingMaskIntoConstraints = false
         categoryBran2.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
         categoryBran2.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130.0).isActive = true
@@ -111,7 +108,7 @@ class Home1: UIViewController {
         
         view.addSubview(categoryBran3)
         categoryBran3.backgroundColor = .white
-        categoryBran3.translatesAutoresizingMaskIntoConstraints = false
+  categoryBran3.translatesAutoresizingMaskIntoConstraints = false
         categoryBran3.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
         categoryBran3.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
         categoryBran3.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130.0).isActive = true
@@ -138,7 +135,7 @@ class Home1: UIViewController {
 }
 
 
-extension Home1: UITableViewDelegate, UITableViewDataSource {
+extension Add1: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == categoryBran4 {
@@ -177,7 +174,7 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showEX", sender: self)
+    performSegue(withIdentifier: "ex", sender: self)
     }
     
     
@@ -185,15 +182,15 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
+extension Add1: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subcategorys1.count
+        return addSubcategorys1.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = subcategory.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! CollectionViewCell
-        cell.subCategoryName.text = subcategorys1[indexPath.row].name
+        cell.subCategoryName.text = addSubcategorys1[indexPath.row].name
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -230,6 +227,6 @@ extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 
-struct Subcategorys1 {
+struct AddSubcategorys1 {
     var name: String
 }

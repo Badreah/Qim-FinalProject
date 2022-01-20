@@ -1,24 +1,19 @@
 //
-//  HomeEx.swift
+//  LikeEx.swift
 //  Qim
 //
-//  Created by Badreah Saad on 13/01/2022.
+//  Created by Badreah Saad on 18/01/2022.
 //
 
 import UIKit
 import Firebase
 
-
-// butoons acction
-// star action
-
-class HomeEx: UIViewController {
+class LikeEx: UIViewController {
     
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
-    
-    var nameUser = ""
-    var imageUser = ""
+   
+
     
     @IBOutlet weak var backView: UIView!
     
@@ -28,11 +23,10 @@ class HomeEx: UIViewController {
     @IBOutlet weak var opiView: UIView!
     @IBOutlet weak var opinion: UILabel!
     
-    @IBOutlet weak var saveButton: UIButton!
    
+    
+    var favEx: favEX!
 
-    var homeex: AllEX!
- 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,9 +37,9 @@ class HomeEx: UIViewController {
         backView.layer.shadowOffset = .zero
         backView.layer.shadowRadius = 5
         backView.translatesAutoresizingMaskIntoConstraints = false
-        backView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120.0).isActive = true
+        backView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150.0).isActive = true
         backView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
-        backView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -190.0).isActive = true
+        backView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150.0).isActive = true
         backView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
        
         
@@ -53,9 +47,9 @@ class HomeEx: UIViewController {
         productView.layer.cornerRadius = 10
 //        productView.backgroundColor = UIColor(named: "Bu")
         productView.translatesAutoresizingMaskIntoConstraints = false
-        productView.topAnchor.constraint(equalTo: backView.topAnchor, constant: 30.0).isActive = true
+        productView.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20.0).isActive = true
         productView.leftAnchor.constraint(equalTo: backView.leftAnchor, constant: 20.0).isActive = true
-        productView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -450.0).isActive = true
+        productView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -470.0).isActive = true
         productView.rightAnchor.constraint(equalTo: backView.rightAnchor, constant: -20.0).isActive = true
        
         
@@ -64,7 +58,7 @@ class HomeEx: UIViewController {
         opiView.translatesAutoresizingMaskIntoConstraints = false
         opiView.topAnchor.constraint(equalTo: backView.topAnchor, constant: 100.0).isActive = true
         opiView.leftAnchor.constraint(equalTo: backView.leftAnchor, constant: 20.0).isActive = true
-        opiView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -40.0).isActive = true
+        opiView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -20.0).isActive = true
         opiView.rightAnchor.constraint(equalTo: backView.rightAnchor, constant: -20.0).isActive = true
        
         
@@ -90,71 +84,20 @@ class HomeEx: UIViewController {
         opinion.widthAnchor.constraint(equalToConstant: 280.0).isActive = true
         opinion.textColor = .black
         
-        saveButton.setTitle("save", for: .normal)
-        saveButton.layer.cornerRadius = 5
-        saveButton.tintColor = UIColor(named: "Vi")
-        saveButton.setTitleColor(UIColor(named: "Bu"), for: .normal)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -110.0).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70.0).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 250.0).isActive = true
-       
-       
-           
-//        viewHomeEx()
-//        getUser()
-    }
-    
-
-    @IBAction func saveToFav(_ sender: Any) {
         
-        //        let vc = AddEX1()
-                db.collection("Saved").addDocument(data: [
-                    "UserID": userID,
-        //            "UserName": ,
-        //            "UserImage": ,
-                    "productName" : productName.text!,
-                    "opi": opinion.text!
-                ])
-                { error in
-                    if error == nil {
-                        print("new saved")
-                    } else {
-                        print(error?.localizedDescription)
-                    }
-                }
-                print("saved!!")
-                dismiss(animated: true)
-        
-    }
-    
-   
-    
-    
-//    func getUser() {
-//        if let userId = userID {
-//        db.collection("Users").document().getDocument { snapShot, error in
-//                if let error = error {
-//                    print("e!!",error.localizedDescription)
-//                } else {
-//                    self.nameUser = snapShot?.get("UserName") as? String ?? "name nil"
-//                    let imgStr = snapShot?.get("UserImage") as? String ?? "image nil"
-//                    self.imageUser = imgStr
-////                    self.getImage(imgStr: imgStr)
-//                }
-//            }
-//        }
-//    }
 
-    func viewHomeEx() {
-        productName.text = homeex.productname
-        opinion.text = homeex.opinion
+//        viewFavEx()
+
     }
     
  
+
+    
+
+    func viewFavEx() {
+        productName.text = favEx.productName
+        opinion.text = favEx.opinion
+    }
+
     
 }
-
-
-

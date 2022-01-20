@@ -8,64 +8,47 @@
 import UIKit
 
 class HomeCateogry: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet weak var categorys: UICollectionView!
+    
   
-    var cat = [
-        Category(title: "Home"),
-        Category(title: "Kitchen"),
-        Category(title: "Technology"),
-        Category(title: "one")
+    var category = [
+        CategoryHome(name: "Home"),
+        CategoryHome(name: "Kitchen"),
+        CategoryHome(name: "Technology"),
+        CategoryHome(name: "Other")
     ]
     
-
-    var myCollection: UICollectionView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-
-        myCollection.register(HomeCell.self, forCellWithReuseIdentifier: "cell")
-//        view.addSubview(myCollection)
-
-//               myCollection.backgroundColor = .white
-                myCollection.delegate = self
-                myCollection.dataSource = self
-        myCollection.allowsSelection = true
-        myCollection.isUserInteractionEnabled = true
-        
-        myCollection.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            myCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            myCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            myCollection.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-//            myCollection.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
-//        ])
-        
+        categorys.delegate = self
+        categorys.dataSource = self
+        categorys.backgroundColor = UIColor(named: "backGround")
+   
 
     }
   
-    override func loadView() {
-        let layOut: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layOut.sectionInset = UIEdgeInsets(top: 50, left: 30, bottom: 10, right: 30)
-        layOut.itemSize = CGSize(width: 150, height: 150)
-        layOut.scrollDirection = .vertical
-        myCollection = UICollectionView(frame: .zero, collectionViewLayout: layOut)
-        self.view = myCollection
 
-    }
     
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cat.count
+         return category.count
     }
 
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeCell
-        cell.titleLabel.text = cat[indexPath.row].title
+        let cell = categorys.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeCell
+        cell.categoryName.text = category[indexPath.row].name
          cell.layer.cornerRadius = 10
-         cell.backgroundColor = .systemGray
-         
+         cell.backgroundColor = UIColor(named: "Vi")
+         cell.categoryName.textColor = UIColor(named: "Bu")
+//         cell.layer.shadowColor = UIColor.white.cgColor
+//         cell.layer.shadowOpacity = 3
+//         cell.layer.shadowOffset = .zero
+//         cell.layer.shadowRadius = 10
+ 
         return cell
     }
     
@@ -73,41 +56,42 @@ class HomeCateogry: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        performSegue(withIdentifier: "cat", sender: self)
-//        switch indexPath.row {
-//        case 0:
-//            let vc = Home1()
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        case 1:
-//            let vc = Home2()
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        case 2:
-//            let vc = Home3()
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        case 3:
-//            let vc = Home4()
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        case 4:
-//            let vc = Home5()
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
-//        default:
-//            print("no index")
-//        }
+        switch indexPath.row {
+        case 0:
+            performSegue(withIdentifier: "ho", sender: self)
+        case 1:
+           performSegue(withIdentifier: "ki", sender: self)
+        case 2:
+            performSegue(withIdentifier: "te", sender: self)
+
+        case 3:
+            performSegue(withIdentifier: "ot", sender: self)
+          
+        default:
+            print("no index")
+        }
 
     }
+    
 
-
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let size = UIScreen.main.bounds.width / 2
+//        return CGSize(width: size, height: size)
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        20
+//    }
+    
+    
+    
     
 }
 
 
-struct Category {
-    var title: String
+struct CategoryHome {
+    var name: String
 }
 
 

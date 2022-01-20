@@ -9,17 +9,31 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var tLabel: UILabel!
+    var categoryBranName: UILabel = {
+        let categoryBranName = UILabel()
+        categoryBranName.text = "F"
+        categoryBranName.textColor = .black
+        return categoryBranName
+    }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+      super.init(style: style, reuseIdentifier: reuseIdentifier)
+      addSubview(categoryBranName)
+      
+        
+      let cellFont = UIFont(name: categoryBranName.font.fontName, size: 17)
+        categoryBranName.font = cellFont
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        categoryBranName.frame = CGRect(x: 60, y: contentView.frame.size.height - 50, width: contentView.frame.width - 5, height: 20)
     }
 
 }

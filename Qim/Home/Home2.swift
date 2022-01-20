@@ -1,5 +1,5 @@
 //
-//  Home1.swift
+//  Home2.swift
 //  Qim
 //
 //  Created by Badreah Saad on 13/01/2022.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class Home1: UIViewController {
-
+class Home2: UIViewController {
 
     @IBOutlet weak var subcategory: UICollectionView!
     
@@ -16,27 +15,29 @@ class Home1: UIViewController {
     let categoryBran2 = UITableView()
     let categoryBran3 = UITableView()
     let categoryBran4 = UITableView()
-   
-    var subcategorys1 = [
-        Subcategorys1(name: "DishWasher"),
-        Subcategorys1(name: "washing"),
-        Subcategorys1(name: "air"),
-        Subcategorys1(name: "heater")
+    
+  
+    
+    var subcategorys2 = [
+        Subcategorys2(name: "blender"),
+        Subcategorys2(name: "cooker"),
+        Subcategorys2(name: "oven"),
+        Subcategorys2(name: "refreger")
     ]
     
     var categorysBran1 = [
-      "DishWasher1","DishWasher2","DishWasher3","DishWasher4"
+      "blender1","blender2","blender3","blender4"
     ]
     var categorysBran2 = [
-      "washing1","washing2","washing3","washing"
+      "cooker1","cooker2","cooker3","cooker4"
     ]
     
     var categorysBran3 = [
-      "air1","air2","air3","air4"
+      "oven1","oven2","oven3","oven4"
     ]
     
     var categorysBran4 = [
-      "heater1","heater2","heater3","heater4"
+      "refreger1","refreger2","refreger3","refreger4"
     ]
     
     
@@ -64,7 +65,7 @@ class Home1: UIViewController {
         categoryBran2.rowHeight = 70
         categoryBran2.layer.cornerRadius = 10
         categoryBran2.layer.masksToBounds = true
-        
+       
         categoryBran3.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran3.delegate = self
         categoryBran3.dataSource = self
@@ -74,7 +75,6 @@ class Home1: UIViewController {
         categoryBran3.layer.cornerRadius = 10
         categoryBran3.layer.masksToBounds = true
        
-        
         categoryBran4.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran4.delegate = self
         categoryBran4.dataSource = self
@@ -84,7 +84,6 @@ class Home1: UIViewController {
         categoryBran4.layer.cornerRadius = 10
         categoryBran4.layer.masksToBounds = true
        
-        
         categoryBran1.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         categoryBran1.delegate = self
         categoryBran1.dataSource = self
@@ -94,7 +93,6 @@ class Home1: UIViewController {
         categoryBran1.layer.cornerRadius = 10
         categoryBran1.layer.masksToBounds = true
        
-
        
     }
 
@@ -138,7 +136,7 @@ class Home1: UIViewController {
 }
 
 
-extension Home1: UITableViewDelegate, UITableViewDataSource {
+extension Home2: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == categoryBran4 {
@@ -178,22 +176,22 @@ extension Home1: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showEX", sender: self)
+
     }
-    
     
     
 }
 
 
-extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
+extension Home2: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subcategorys1.count
+        return subcategorys2.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = subcategory.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! CollectionViewCell
-        cell.subCategoryName.text = subcategorys1[indexPath.row].name
+        cell.subCategoryName.text = subcategorys2[indexPath.row].name
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -215,12 +213,13 @@ extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
             categoryBran2.isHidden = true
             categoryBran3.isHidden = false
             categoryBran4.isHidden = true
+
         case 3:
             categoryBran1.isHidden = true
             categoryBran2.isHidden = true
             categoryBran3.isHidden = true
             categoryBran4.isHidden = false
-        default:
+       default:
             break
         }
     }
@@ -230,6 +229,6 @@ extension Home1: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 
-struct Subcategorys1 {
+struct Subcategorys2 {
     var name: String
 }

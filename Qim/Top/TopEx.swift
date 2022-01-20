@@ -1,22 +1,18 @@
 //
-//  HomeEx.swift
+//  TopEx.swift
 //  Qim
 //
-//  Created by Badreah Saad on 13/01/2022.
+//  Created by Badreah Saad on 18/01/2022.
 //
 
 import UIKit
 import Firebase
 
-
-// butoons acction
-// star action
-
-class HomeEx: UIViewController {
+class TopEx: UIViewController {
     
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
-    
+   
     var nameUser = ""
     var imageUser = ""
     
@@ -30,12 +26,11 @@ class HomeEx: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
    
-
-    var homeex: AllEX!
- 
+    var topEx: TopEX!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addSubview(backView)
         backView.layer.cornerRadius = 20
         backView.layer.shadowColor = UIColor.black.cgColor
@@ -99,14 +94,15 @@ class HomeEx: UIViewController {
         saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70.0).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
         saveButton.widthAnchor.constraint(equalToConstant: 250.0).isActive = true
-       
-       
-           
-//        viewHomeEx()
-//        getUser()
+        
+        
+
+
+//        viewTopEx()
     }
     
-
+ 
+    
     @IBAction func saveToFav(_ sender: Any) {
         
         //        let vc = AddEX1()
@@ -128,31 +124,15 @@ class HomeEx: UIViewController {
                 dismiss(animated: true)
         
     }
-    
-   
-    
-    
-//    func getUser() {
-//        if let userId = userID {
-//        db.collection("Users").document().getDocument { snapShot, error in
-//                if let error = error {
-//                    print("e!!",error.localizedDescription)
-//                } else {
-//                    self.nameUser = snapShot?.get("UserName") as? String ?? "name nil"
-//                    let imgStr = snapShot?.get("UserImage") as? String ?? "image nil"
-//                    self.imageUser = imgStr
-////                    self.getImage(imgStr: imgStr)
-//                }
-//            }
-//        }
-//    }
 
-    func viewHomeEx() {
-        productName.text = homeex.productname
-        opinion.text = homeex.opinion
-    }
     
- 
+    func viewTopEx() {
+        productName.text = topEx.productName
+        opinion.text = topEx.opinion
+
+
+    }
+  
     
 }
 

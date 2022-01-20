@@ -9,7 +9,8 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var cLabel: UILabel!
-    
+ 
+    @IBOutlet weak var subCategoryName: UILabel!
+  
     
 }

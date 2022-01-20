@@ -20,7 +20,7 @@ class SignUPVC: UIViewController {
     let signButton = UIButton(frame: CGRect(x: 110, y: 600, width: 200, height: 50))
     
     let logLabel = UILabel(frame: CGRect(x: 70, y: 750, width: 200, height: 50))
-    let logButton = UIButton(frame: CGRect(x: 260, y: 750, width: 70, height: 50))
+    let logButton = UIButton(frame: CGRect(x: 260, y: 750, width: 150, height: 50))
     
     let backButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 50))
     
@@ -29,6 +29,8 @@ class SignUPVC: UIViewController {
     
     let imagePicker = UIImagePickerController()
     let imageName = "\(UUID().uuidString).png"
+    
+    var usersArray = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,32 +48,39 @@ class SignUPVC: UIViewController {
       
         view.addSubview(backButton)
         
-        userImage.frame = CGRect(x: 80, y: 100, width: 70, height: 70)
+        userImage.frame = CGRect(x: 150, y: 200, width: 100, height: 100)
         userImage.image = UIImage(systemName: "person")
         userImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(addImage))
         userImage.addGestureRecognizer(tap)
+        userImage.contentMode = .scaleAspectFill
+        userImage.layer.cornerRadius = userImage.frame.width/2
+        userImage.clipsToBounds = true
         
-        nameField.placeholder = "  name"
+        nameField.placeholder = "الاسم"
         nameField.backgroundColor = .lightText
+        nameField.textAlignment = .right
         
-        emailField.placeholder = "  email"
+        emailField.placeholder = " البريد الالكتروني"
         emailField.backgroundColor = .lightText
+        emailField.textAlignment = .right
         
-        passField.placeholder = "  password"
+        passField.placeholder = "  كلمة المرور"
         passField.backgroundColor = .lightText
+        passField.isSecureTextEntry = true
+        passField.textAlignment = .right
         
-        signButton.setTitle("SignUp", for: .normal)
+        signButton.setTitle("سجل", for: .normal)
         signButton.backgroundColor = .white
         signButton.layer.cornerRadius = 10
         signButton.setTitleColor(.blue, for: .normal)
         signButton.addTarget(self, action: #selector(userSignUp), for: .touchUpInside)
         
         
-        logLabel.text = "alerdy have account?"
+        logLabel.text = "لديك حساب بالفعل؟"
         logLabel.textColor = .black
         
-        logButton.setTitle("LogIn", for: .normal)
+        logButton.setTitle("سجل الدخول", for: .normal)
         logButton.setTitleColor(.blue, for: .normal)
         logButton.addTarget(self, action: #selector(userLogIn), for: .touchUpInside)
                 
@@ -88,6 +97,9 @@ class SignUPVC: UIViewController {
     }
     
     @objc func userLogIn() {
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Lvc") as! LoginVC
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
         let vc = LoginVC()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
@@ -104,20 +116,23 @@ class SignUPVC: UIViewController {
     }
     
     func addNewUser(userId: String) {
-        if userImage.image != UIImage(systemName: "person") {
+//        if userImage.image != UIImage(systemName: "person") {
             uploadImage()
-        }
-        
+//        }
         self.db.collection("Users").document(userId).setData([
             "ID": userId,
-            "Name" : self.nameField.text!,
+            "UserName" : self.nameField.text!,
             "Email": self.emailField.text!,
-            "UserImage": userImage.image == UIImage(systemName: "person") ? "nil": imageName
+            "UserImage": imageName
+//                userImage.image == UIImage(systemName: "person") ? "nil": imageName
             
         ])
         { err in
             if err == nil {
                 print("user added")
+                //
+                let newUser = User(name: self.nameField.text!, image: self.imageName)
+                self.usersArray.append(newUser)
             } else {
                 print("no user!",err?.localizedDescription)
             }
@@ -209,4 +224,10 @@ extension SignUPVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         picker.dismiss(animated: true, completion: nil)
     }
     
+}
+
+
+struct User {
+    var name: String
+    var image: String
 }
