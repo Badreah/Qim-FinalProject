@@ -46,8 +46,14 @@
 		9830BBE22794ABE800BE2AFB /* Add4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE12794ABE800BE2AFB /* Add4.swift */; };
 		9830BBE527967F6C00BE2AFB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9830BBE427967F6C00BE2AFB /* FirebaseDatabase */; };
 		9830BBE72796B09B00BE2AFB /* LikeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE62796B09B00BE2AFB /* LikeEx.swift */; };
-		9830BBE92796B0ED00BE2AFB /* TopEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE82796B0ED00BE2AFB /* TopEx.swift */; };
+		9830BBE92796B0ED00BE2AFB /* TopExContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBE82796B0ED00BE2AFB /* TopExContent.swift */; };
 		9830BBEB2796C33D00BE2AFB /* UserEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9830BBEA2796C33C00BE2AFB /* UserEx.swift */; };
+		9831F6572799F019004F4EAE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F6562799F019004F4EAE /* Settings.swift */; };
+		9831F65D2799F83B004F4EAE /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F65C2799F83B004F4EAE /* HomeModels.swift */; };
+		9831F65F2799F8A1004F4EAE /* AddModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F65E2799F8A1004F4EAE /* AddModels.swift */; };
+		9831F6612799F8F7004F4EAE /* TopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F6602799F8F7004F4EAE /* TopModel.swift */; };
+		9831F6632799F90D004F4EAE /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F6622799F90D004F4EAE /* LikeModel.swift */; };
+		9831F6652799F93A004F4EAE /* UsersModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831F6642799F93A004F4EAE /* UsersModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,8 +94,14 @@
 		9830BBDF2794AA9C00BE2AFB /* Add3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add3.swift; sourceTree = "<group>"; };
 		9830BBE12794ABE800BE2AFB /* Add4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add4.swift; sourceTree = "<group>"; };
 		9830BBE62796B09B00BE2AFB /* LikeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeEx.swift; sourceTree = "<group>"; };
-		9830BBE82796B0ED00BE2AFB /* TopEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEx.swift; sourceTree = "<group>"; };
+		9830BBE82796B0ED00BE2AFB /* TopExContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopExContent.swift; sourceTree = "<group>"; };
 		9830BBEA2796C33C00BE2AFB /* UserEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEx.swift; sourceTree = "<group>"; };
+		9831F6562799F019004F4EAE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		9831F65C2799F83B004F4EAE /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		9831F65E2799F8A1004F4EAE /* AddModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModels.swift; sourceTree = "<group>"; };
+		9831F6602799F8F7004F4EAE /* TopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopModel.swift; sourceTree = "<group>"; };
+		9831F6622799F90D004F4EAE /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
+		9831F6642799F93A004F4EAE /* UsersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,14 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				9830BBA4279046DF00BE2AFB /* App */,
-				9830BBA5279046F000BE2AFB /* Profile */,
-				9830BBC027905FDE00BE2AFB /* Like */,
-				9830BBC52790601E00BE2AFB /* Top */,
-				9830BBB7279057EB00BE2AFB /* Add */,
-				9830BBA62790472000BE2AFB /* Home */,
-				9830BB822790444C00BE2AFB /* Main.storyboard */,
-				9830BB882790445100BE2AFB /* Assets.xcassets */,
-				9830BB8A2790445100BE2AFB /* LaunchScreen.storyboard */,
+				9831F6582799F762004F4EAE /* Models */,
+				9831F6592799F770004F4EAE /* Controller */,
+				9831F65A2799F782004F4EAE /* Views */,
 				9830BB8D2790445100BE2AFB /* Info.plist */,
 				9830BB932790448300BE2AFB /* GoogleService-Info.plist */,
 				9830BB852790444C00BE2AFB /* Qim.xcdatamodeld */,
@@ -157,6 +164,7 @@
 			children = (
 				9830BB802790444C00BE2AFB /* ProfileVc.swift */,
 				9830BB9C2790466A00BE2AFB /* ProfileVCCell.swift */,
+				9831F6562799F019004F4EAE /* Settings.swift */,
 				9830BBEA2796C33C00BE2AFB /* UserEx.swift */,
 				9830BB9E2790468B00BE2AFB /* LoginVC.swift */,
 				9830BBA0279046A100BE2AFB /* ForgotPassVC.swift */,
@@ -212,7 +220,7 @@
 			children = (
 				9830BBC62790603700BE2AFB /* TopVC.swift */,
 				9830BBC82790604C00BE2AFB /* TopVCCell.swift */,
-				9830BBE82796B0ED00BE2AFB /* TopEx.swift */,
+				9830BBE82796B0ED00BE2AFB /* TopExContent.swift */,
 			);
 			path = Top;
 			sourceTree = "<group>";
@@ -222,6 +230,40 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9831F6582799F762004F4EAE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9831F6642799F93A004F4EAE /* UsersModels.swift */,
+				9831F6622799F90D004F4EAE /* LikeModel.swift */,
+				9831F6602799F8F7004F4EAE /* TopModel.swift */,
+				9831F65E2799F8A1004F4EAE /* AddModels.swift */,
+				9831F65C2799F83B004F4EAE /* HomeModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9831F6592799F770004F4EAE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9830BBA5279046F000BE2AFB /* Profile */,
+				9830BBC027905FDE00BE2AFB /* Like */,
+				9830BBC52790601E00BE2AFB /* Top */,
+				9830BBB7279057EB00BE2AFB /* Add */,
+				9830BBA62790472000BE2AFB /* Home */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9831F65A2799F782004F4EAE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9830BB822790444C00BE2AFB /* Main.storyboard */,
+				9830BB882790445100BE2AFB /* Assets.xcassets */,
+				9830BB8A2790445100BE2AFB /* LaunchScreen.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,12 +347,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9831F6652799F93A004F4EAE /* UsersModels.swift in Sources */,
 				9830BBA3279046B400BE2AFB /* SignUPVC.swift in Sources */,
 				9830BBB227904DD200BE2AFB /* HomeUEx.swift in Sources */,
-				9830BBE92796B0ED00BE2AFB /* TopEx.swift in Sources */,
+				9830BBE92796B0ED00BE2AFB /* TopExContent.swift in Sources */,
 				9830BBCD27908ADD00BE2AFB /* Home2.swift in Sources */,
 				9830BB9D2790466A00BE2AFB /* ProfileVCCell.swift in Sources */,
 				9830BB812790444C00BE2AFB /* ProfileVc.swift in Sources */,
+				9831F6612799F8F7004F4EAE /* TopModel.swift in Sources */,
+				9831F65D2799F83B004F4EAE /* HomeModels.swift in Sources */,
 				9830BBA1279046A100BE2AFB /* ForgotPassVC.swift in Sources */,
 				9830BBEB2796C33D00BE2AFB /* UserEx.swift in Sources */,
 				9830BBE22794ABE800BE2AFB /* Add4.swift in Sources */,
@@ -319,6 +364,8 @@
 				9830BBE02794AA9C00BE2AFB /* Add3.swift in Sources */,
 				9830BBA82790473300BE2AFB /* HomeCateogry.swift in Sources */,
 				9830BB7D2790444C00BE2AFB /* AppDelegate.swift in Sources */,
+				9831F6632799F90D004F4EAE /* LikeModel.swift in Sources */,
+				9831F6572799F019004F4EAE /* Settings.swift in Sources */,
 				9830BBB02790496000BE2AFB /* CollectionViewCell.swift in Sources */,
 				9830BBC227905FFB00BE2AFB /* LikeVC.swift in Sources */,
 				9830BB7F2790444C00BE2AFB /* SceneDelegate.swift in Sources */,
@@ -334,6 +381,7 @@
 				9830BBC72790603700BE2AFB /* TopVC.swift in Sources */,
 				9830BBD127908D5E00BE2AFB /* Home4.swift in Sources */,
 				9830BBC92790604C00BE2AFB /* TopVCCell.swift in Sources */,
+				9831F65F2799F8A1004F4EAE /* AddModels.swift in Sources */,
 				9830BB872790444C00BE2AFB /* Qim.xcdatamodeld in Sources */,
 				9830BBE72796B09B00BE2AFB /* LikeEx.swift in Sources */,
 				9830BBDC2790AC7600BE2AFB /* AddEX1.swift in Sources */,
