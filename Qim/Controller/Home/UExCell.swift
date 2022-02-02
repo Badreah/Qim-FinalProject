@@ -6,11 +6,12 @@
 //
 
 import UIKit
-import Firebase
+
 
 class UExCell: UITableViewCell {
     
 
+    
     @IBOutlet weak var userImage: UIImageView!
     
     @IBOutlet weak var userName: UILabel!
@@ -20,6 +21,10 @@ class UExCell: UITableViewCell {
     
     @IBOutlet weak var share: UIButton!
     
- 
+    @IBOutlet weak var creationDate: UILabel!
+    
+    
+    
+    
 
 }

@@ -10,69 +10,87 @@ import Firebase
 
 class ForgotPassVC: UIViewController {
     
-    let resetEmail = UITextField(frame: CGRect(x: 60, y: 300, width: 300, height: 50))
-    let resetButton = UIButton(frame: CGRect(x: 150, y: 500, width: 200, height: 50))
-    let backButton = UIButton(frame: CGRect(x: 10, y: 50, width: 50, height: 50))
- 
+    
+    @IBOutlet weak var resetEmailField: UITextField!
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var resetButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
+        
+        setUp()
         
         hideKeyboardWhenTappedAround()
         
-        view.addSubview(resetEmail)
-        resetEmail.placeholder = "البريد الالكتروني"
-        resetEmail.backgroundColor = .systemGray
-        resetEmail.textAlignment = .right
-        resetEmail.layer.cornerRadius = 10
-        
-        view.addSubview(resetButton)
-        resetButton.setTitle("اعادة تعيين كلمة المرور", for: .normal)
-        resetButton.setTitleColor(.black, for: .normal)
-        resetButton.backgroundColor = .white
-        resetButton.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
-        
-        view.addSubview(backButton)
-        backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(.black, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Helvetica", size: 30)
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-        
-        
-    }
-    
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
     }
     
     
-    @objc func resetPassword(){
-        Auth.auth().sendPasswordReset(withEmail: resetEmail.text!) { (error) in
+    
+    @IBAction func userResetPassword(_ sender: Any) {
+        
+        Auth.auth().sendPasswordReset(withEmail: resetEmailField.text!) { (error) in
             if error != nil {
-                if self.resetEmail.text != "" {
-                self.dismiss(animated: true, completion: nil)
+                if self.resetEmailField.text != "" {
+                    self.dismiss(animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: "تنبيه", message: "", preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
-                                    self.present(alert, animated: true, completion: nil)
+                    let alert = UIAlertController(title: "تنبيه", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             } else {
-                print("can't reset", error?.localizedDescription)
+                print("can't reset pass", error?.localizedDescription)
             }
         }
     }
     
+    
+    
+    
     func hideKeyboardWhenTappedAround() {
-       
-      let tap = UITapGestureRecognizer(target: self, action: #selector(ForgotPassVC.dismissKeyboard))
-      tap.cancelsTouchesInView = false
-      view.addGestureRecognizer(tap)
-     }
-      
-     @objc func dismissKeyboard() {
-      view.endEditing(true)
-     }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ForgotPassVC.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
+}
+
+
+extension ForgotPassVC {
+    
+    func setUp() {
+        
+        view.addSubview(backView)
+        backView.layer.cornerRadius = 20
+        backView.layer.shadowColor = UIColor.black.cgColor
+        backView.layer.shadowOpacity = 1
+        backView.layer.shadowOffset = .zero
+        backView.layer.shadowRadius = 5
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250.0).isActive = true
+        backView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
+        backView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400.0).isActive = true
+        backView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
+        
+        
+        backView.addSubview(resetButton)
+        resetButton.layer.cornerRadius = 5
+        resetButton.tintColor = UIColor(named: "Bu")
+        resetButton.setTitleColor(.black, for: .normal)
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.topAnchor.constraint(equalTo: backView.topAnchor, constant: 150.0).isActive = true
+        resetButton.rightAnchor.constraint(equalTo: backView.rightAnchor, constant: -60.0).isActive = true
+        resetButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        resetButton.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
+        
+    }
+    
     
     
 }

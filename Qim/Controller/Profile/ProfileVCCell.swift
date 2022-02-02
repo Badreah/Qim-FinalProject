@@ -10,12 +10,21 @@ import UIKit
 class ProfileVCCell: UITableViewCell {
     
     
-    var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "F"
-        label.textColor = .black
-        return label
+    var productName: UILabel = {
+        let productName = UILabel()
+        productName.text = "F"
+        productName.textColor = .black
+        return productName
     }()
+    
+    var creationDate: UILabel = {
+        let creationDate = UILabel()
+        creationDate.text = "date"
+        creationDate.textColor = .black
+        return creationDate
+    }()
+   
+    
     
     var share: UIButton = {
         let share = UIButton()
@@ -43,13 +52,15 @@ class ProfileVCCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
-      addSubview(titleLabel)
+      addSubview(productName)
+        addSubview(creationDate)
         
         contentView.addSubview(share)
 
         
-      let cellFont = UIFont(name: titleLabel.font.fontName, size: 17)
-        titleLabel.font = cellFont
+      let cellFont = UIFont(name: productName.font.fontName, size: 17)
+        productName.font = cellFont
+        creationDate.font = cellFont
         
     }
 
@@ -62,10 +73,11 @@ class ProfileVCCell: UITableViewCell {
         super.layoutSubviews()
         
 
-        titleLabel.frame = CGRect(x: 40, y: contentView.frame.size.height - 50, width: contentView.frame.width - 5, height: 20)
-        
+        productName.frame = CGRect(x: 40, y: contentView.frame.size.height - 60, width: contentView.frame.width - 5, height: 20)
         
         share.frame = CGRect(x: 140, y: contentView.frame.size.height - 50, width: contentView.frame.width - 3, height: 15)
+        
+        creationDate.frame = CGRect(x: 40, y: contentView.frame.size.height - 30, width: contentView.frame.width - 4, height: 20)
         
     }
     

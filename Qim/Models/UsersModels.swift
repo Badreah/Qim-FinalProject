@@ -5,14 +5,17 @@
 //  Created by Badreah Saad on 20/01/2022.
 //
 
+import Foundation
 
 
-struct Ex {
-//    var name: String
-//    var userImage: String
+
+struct Experience {
+    var name: String
+    var userImage: String
     var productName: String
-    var opi: String
-    
+    var opinion: String
+    var productImage: String
+    var creationDate = Date()
 }
 
 struct User {

@@ -8,13 +8,13 @@
 import UIKit
 import Firebase
 
-class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ProfileVc: UIViewController {
+    
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser?.uid
     let imagePicker = UIImagePickerController()
     var updateImageName = "\(UUID().uuidString).png"
-
+    
     
     let loginView: UIView = {
         let loginView = UIView()
@@ -23,11 +23,8 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let loginButton = UIButton()
     
-    let signUpLabel = UILabel(frame: CGRect(x: 130, y: 400, width: 200, height: 50))
     
-    let signUpButton = UIButton(frame: CGRect(x: 160, y: 460, width: 70, height: 50))
-   
-    
+    let signUpButton = UIButton()
     
     @IBOutlet weak var lView: UIView!
     @IBOutlet weak var labelView: UIView!
@@ -42,103 +39,23 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var userImage = UIImageView()
     var userName = UILabel()
     let myTabel = UITableView()
-
+    let emptyView = UIView()
     
-    var exArray = [Ex]()
+    var experienceArray = [Experience]()
+    let refreshC = UIRefreshControl()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self
-
-        hideKeyboardWhenTappedAround()
-
-        view.backgroundColor = .white
         view.addSubview(loginView)
         loginView.isHidden = true
+        
         view.addSubview(profileView)
         profileView.isHidden = true
         
-        profileView.addSubview(setting)
-        
-        loginView.translatesAutoresizingMaskIntoConstraints = false
-        loginView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30.0).isActive = true
-        loginView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0.0).isActive = true
-        loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0).isActive = true
-        loginView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0.0).isActive = true
-        
-        profileView.translatesAutoresizingMaskIntoConstraints = false
-        profileView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30.0).isActive = true
-        profileView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0.0).isActive = true
-        profileView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0).isActive = true
-        profileView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0.0).isActive = true
-//
-        
-        setting.setTitle("الاعدادت", for: .normal)
-        setting.setTitleColor(UIColor(named: "Bu"), for: .normal)
-        setting.layer.cornerRadius = 10
-        setting.addTarget(self, action: #selector(userSetting), for: .touchUpInside)
-        setting.translatesAutoresizingMaskIntoConstraints = false
-        setting.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 50.0).isActive = true
-        setting.leftAnchor.constraint(equalTo: profileView.leftAnchor, constant: 275.0).isActive = true
-
-        
-        profileView.addSubview(userImage)
-        userImage.image = UIImage(systemName: "person")
-        userImage.frame = CGRect(x: 280, y: 110, width: 100, height: 100)
-        userImage.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(addUserImage))
-        userImage.addGestureRecognizer(tap)
-        userImage.contentMode = .scaleAspectFill
-        userImage.layer.cornerRadius = userImage.frame.width/2
-        userImage.clipsToBounds = true
-        
-        profileView.addSubview(userName)
-
-        userName.textColor = UIColor(named: "Bu")
-        userName.translatesAutoresizingMaskIntoConstraints = false
-        userName.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 140.0).isActive = true
-        userName.rightAnchor.constraint(equalTo: profileView.rightAnchor, constant: -250.0).isActive = true
-
-        
-        profileView.addSubview(myTabel)
-        myTabel.register(ProfileVCCell.self, forCellReuseIdentifier: "cell")
-        myTabel.delegate = self
-        myTabel.dataSource = self
-
-        myTabel.rowHeight = 80
-        myTabel.backgroundColor = .white
-        myTabel.layer.cornerRadius = 10
-        myTabel.layer.masksToBounds = true
-        myTabel.translatesAutoresizingMaskIntoConstraints = false
-        myTabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 225.0).isActive = true
-        myTabel.leftAnchor.constraint(equalTo: profileView.leftAnchor, constant: 20.0).isActive = true
-        myTabel.bottomAnchor.constraint(equalTo: profileView.bottomAnchor, constant: -80.0).isActive = true
-        myTabel.rightAnchor.constraint(equalTo: profileView.rightAnchor, constant: -20.0).isActive = true
-
-        loginView.addSubview(loginButton)
-        loginView.addSubview(signUpLabel)
-        loginView.addSubview(signUpButton)
-        
-        loginButton.backgroundColor = UIColor(named: "Bu")
-        loginButton.setTitle("تسجيل الدخول", for: .normal)
-        loginButton.setTitleColor(UIColor(named: "Vi"), for: .normal)
-        loginButton.layer.cornerRadius = 10
-        loginButton.addTarget(self, action: #selector(userLogIn), for: .touchUpInside)
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.topAnchor.constraint(equalTo: loginView.topAnchor, constant: 230.0).isActive = true
-        loginButton.rightAnchor.constraint(equalTo: loginView.rightAnchor, constant: -100.0).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-        loginButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
-       
-        
-        signUpLabel.text = "ليس لديك حساب؟"
-        signUpLabel.textColor = UIColor(named: "Bu")
-        
-        signUpButton.setTitle("سجل", for: .normal)
-        signUpButton.setTitleColor(UIColor(named: "Bu"), for: .normal)
-        signUpButton.addTarget(self, action: #selector(userSignUP), for: .touchUpInside)
+        //        loginView.addSubview(lView)
+        //        lView.isHidden = true
         
         if Auth.auth().currentUser?.uid != nil {
             profileView.isHidden = false
@@ -150,53 +67,52 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
             loginView.isHidden = false
             labelView.isHidden = true
             pView.isHidden = true
-            lView.layer.cornerRadius = 20
-            lView.layer.shadowColor = UIColor.black.cgColor
-            lView.layer.shadowOpacity = 1
-            lView.layer.shadowOffset = .zero
-            lView.layer.shadowRadius = 5
-            lView.translatesAutoresizingMaskIntoConstraints = false
-            lView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200.0).isActive = true
-            lView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
-            lView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200.0).isActive = true
-            lView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
+            //            lView.isHidden = false
             
-
         }
-
+        
+        
+        imagePicker.delegate = self
+        
+        setUp()
+        
+        hideKeyboardWhenTappedAround()
+        
         loadUserProfile()
         loadEx()
-//        updateImage()
+        
+        refreshC.attributedTitle = NSAttributedString(string: "pull to refresh")
+        refreshC.addTarget(self, action: #selector(ref(_:)), for: .valueChanged)
+        myTabel.addSubview(refreshC)
+        
+    }
+    
+    @objc func ref(_ sender: AnyObject){
+        experienceArray.removeAll()
+        loadEx()
+        refreshC.endRefreshing()
     }
     
     
-   
-    
     // loginView
     @objc func userSignUP() {
-        let vc = SignUPVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "signVc", sender: self)
     }
     
     @objc func userLogIn() {
         performSegue(withIdentifier: "logVc", sender: self)
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Lvc") as! LoginVC
-//        vc.modalPresentationStyle = .fullScreen
-//        self.present(vc, animated: true, completion: nil)
-
     }
     
-    // profileView
     
+    
+    
+    // profileView
     @objc func userSetting() {
         performSegue(withIdentifier: "set", sender: self)
         print("??set??")
     }
     
-   
     
- 
     func loadUserProfile() {
         if let userId = userID {
             db.collection("Users").document(userId).getDocument { snapshot, error in
@@ -205,16 +121,16 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } else {
                     self.userName.text = snapshot?.get("UserName") as? String ?? "no name!"
                     let imageStr = snapshot?.get("UserImage") as? String ?? "no image!"
-//                    if imageStr == "nil" {
-//                        self.userImage.image = UIImage(systemName: "person")
-//                    } else {
-                        self.loadImage(imageStr: imageStr)
-                    }
+                    //                    if imageStr == "nil" {
+                    //                        self.userImage.image = UIImage(systemName: "person")
+                    //                    } else {
+                    self.loadImage(imageStr: imageStr)
                 }
             }
         }
+    }
     
-//    }
+    //    }
     
     
     func loadImage(imageStr: String) {
@@ -269,67 +185,98 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-   
-
-
+    
+    
+    
+    
     
     func loadEx() {
-        db.collection("NewEX")
-//            .document("EX").getDocument { documentSnapshot, error in
-////
-////        })
+        db.collection("NewEX").order(by: "creationDate", descending: true)
             .getDocuments { [self] (qurysnapshot, error) in
-            if let error = error {
-                print("no new ex!", error.localizedDescription)
-            } else {
-                for doc in qurysnapshot!.documents {
-                    let data = doc.data()
-                    
-                    
-                    print((doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid )
-                    if (doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid {
-                        print("!!",(doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid )
-                
-                    let newEX = Ex(productName: data["productName"] as? String ?? "no product",
-                                   opi: data["opi"] as? String ?? "no opi")
-//                                   pro: data["pro"] as? String ?? "no pro",
-//                                   con: data["con"] as? String ?? "no con")
-                
-//                let newEX = Ex(productName: documentSnapshot?.get("productName") as? String ?? "no product",
-                    
-                    
-                    
-//                               opi: documentSnapshot?.get("opi") as? String ?? "no opi",
-//                               pro: documentSnapshot?.get("pro") as? String ?? "no pro",
-//                               con: documentSnapshot?.get("con") as? String ?? "no con")
-                    self.exArray.append(newEX)
-                        print(newEX)
-                    }
-                    self.myTabel.reloadData()
-                    
+                if let error = error {
+                    print("no new ex!", error.localizedDescription)
+                } else {
+                    for doc in qurysnapshot!.documents {
+                        let data = doc.data()
+                        let timestamp: Timestamp = data["creationDate"] as! Timestamp
+                        let datetest: Date = timestamp.dateValue()
+                        print((doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid )
+                        if (doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid {
+                            print("!!",(doc.get("UserID") as? String ?? "nil!") == Auth.auth().currentUser?.uid )
+                            
+                            let newEX = Experience(name: data["UserName"] as? String ?? "no na",
+                                                   userImage: data["UserImage"] as? String ?? "no img",
+                                                   productName: data["productName"] as? String ?? "no product",
+                                                   opinion: data["opinion"] as? String ?? "no opi",
+                                                   productImage: data["productImage"] as? String ?? "no Pro img",
+                                                   creationDate: datetest)
+                            
+                            self.experienceArray.append(newEX)
+                            print(newEX)
+                        }
+                        self.myTabel.reloadData()
+                        
                     }
                 }
             }
-        }
+    }
+    
+    
     
     @objc func shareToButton() {
-
         let c = ProfileVCCell()
-        let activityVC = UIActivityViewController(activityItems: [c.titleLabel.text!], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [c.productName.text!], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = view
         print("!! share !!")
         present(activityVC, animated: true, completion: nil)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exArray.count
+    
+    
+    
+    func hideKeyboardWhenTappedAround() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ProfileVc.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
+    
+}
+
+
+extension ProfileVc: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if experienceArray.count == 0 {
+            myTabel.setEmptyMessage("لم تقم بإضافة تقييمات بعد ")
+        } else {
+            myTabel.restore()
+        }
+        return experienceArray.count
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTabel.dequeueReusableCell(withIdentifier: "cell") as! ProfileVCCell
-        cell.titleLabel.text = exArray[indexPath.row].productName
+        cell.productName.text = experienceArray[indexPath.row].productName
+        
+        let date = experienceArray[indexPath.row].creationDate
+        var stringDate = ""
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        stringDate =  formatter.string(from: date ?? Date())
+        //
+        
+        cell.creationDate.text = stringDate
+        
         cell.share.addTarget(self, action: #selector(shareToButton), for: .touchUpInside)
-
+        
         cell.backgroundColor = .white
         
         return cell
@@ -339,61 +286,170 @@ class ProfileVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "userEx") as! UserEx
         vc.modalPresentationStyle = .fullScreen
-        vc.userEx = exArray[indexPath.row]
-        self.present(vc, animated: true, completion: nil)
-
+        vc.userEx = experienceArray[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+        //        self.present(vc, animated: true, completion: nil)
+        
         print("??")
     }
     
-  
-    func hideKeyboardWhenTappedAround() {
-       
-      let tap = UITapGestureRecognizer(target: self, action: #selector(ProfileVc.dismissKeyboard))
-      tap.cancelsTouchesInView = false
-      view.addGestureRecognizer(tap)
-     }
-      
-     @objc func dismissKeyboard() {
-      view.endEditing(true)
-     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let userEmail = Auth.auth().currentUser!.email!
+        
+        if (editingStyle == .delete) {
+            db.collection("NewEX").document("\(userEmail)-\(experienceArray[indexPath.row].productName)").delete()
+            { error in
+                if let error = error {
+                    print("??Error removing document",error.localizedDescription)
+                } else {
+                    let alert = UIAlertController(title: "", message: "تم حذف تقييمك بنجاح", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "حسنا", style: .default ,handler: { action in
+                        self.myTabel.reloadData()
+                    })
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
+                    print("Document successfully removed!!!")
+                }
+            }
+        }
+        
+    }
+    
     
     
     
 }
+
+
 
 
 extension ProfileVc: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-     let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-    userImage.image = pickedImage
-      updataImage()
-    picker.dismiss(animated: true, completion: nil)
-  }
-
-
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        userImage.image = pickedImage
+        updataImage()
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
 
 
 
 
+extension ProfileVc {
+    
+    func setUp() {
+        
+        //login view
+        
+        
+        loginView.translatesAutoresizingMaskIntoConstraints = false
+        loginView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30.0).isActive = true
+        loginView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0.0).isActive = true
+        loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0).isActive = true
+        loginView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0.0).isActive = true
+        
+        loginView.addSubview(loginButton)
+        loginButton.backgroundColor = UIColor(named: "Bu")
+        loginButton.setTitle("تسجيل الدخول", for: .normal)
+        loginButton.setTitleColor(UIColor(named: "Vi"), for: .normal)
+        loginButton.layer.cornerRadius = 10
+        loginButton.addTarget(self, action: #selector(userLogIn), for: .touchUpInside)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.topAnchor.constraint(equalTo: loginView.topAnchor, constant: 300.0).isActive = true
+        loginButton.rightAnchor.constraint(equalTo: loginView.rightAnchor, constant: -70.0).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: 250.0).isActive = true
+        
+        loginView.addSubview(signUpButton)
+        signUpButton.backgroundColor = UIColor(named: "Bu")
+        signUpButton.setTitle("انشاء حساب جديد", for: .normal)
+        signUpButton.setTitleColor(UIColor(named: "Vi"), for: .normal)
+        signUpButton.layer.cornerRadius = 10
+        signUpButton.addTarget(self, action: #selector(userSignUP), for: .touchUpInside)
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        signUpButton.topAnchor.constraint(equalTo: loginView.topAnchor, constant: 440.0).isActive = true
+        signUpButton.rightAnchor.constraint(equalTo: loginView.rightAnchor, constant: -70.0).isActive = true
+        signUpButton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        signUpButton.widthAnchor.constraint(equalToConstant: 250.0).isActive = true
+        
+        
+        //profile view
+        
+        profileView.translatesAutoresizingMaskIntoConstraints = false
+        profileView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30.0).isActive = true
+        profileView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0.0).isActive = true
+        profileView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0).isActive = true
+        profileView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0.0).isActive = true
+        
+        profileView.addSubview(setting)
+        //        setting.setTitle("الإعدادت", for: .normal)
+        setting.setImage(UIImage(named: "set2"), for: .normal)
+        //        setting.setTitleColor(UIColor(named: "Bu"), for: .normal)
+        //        setting.tintColor = .red
+        setting.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setting.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        setting.layer.cornerRadius = 10
+        setting.addTarget(self, action: #selector(userSetting), for: .touchUpInside)
+        setting.translatesAutoresizingMaskIntoConstraints = false
+        setting.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 30.0).isActive = true
+        setting.leftAnchor.constraint(equalTo: profileView.leftAnchor, constant: 330.0).isActive = true
+        
+        profileView.addSubview(userImage)
+        userImage.image = UIImage(systemName: "person")
+        userImage.frame = CGRect(x: 280, y: 110, width: 100, height: 100)
+        userImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addUserImage))
+        userImage.addGestureRecognizer(tap)
+        userImage.contentMode = .scaleAspectFill
+        userImage.layer.cornerRadius = userImage.frame.width/2
+        userImage.clipsToBounds = true
+        
+        profileView.addSubview(userName)
+        userName.textColor = UIColor(named: "Bu")
+        userName.translatesAutoresizingMaskIntoConstraints = false
+        userName.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 140.0).isActive = true
+        userName.rightAnchor.constraint(equalTo: profileView.rightAnchor, constant: -250.0).isActive = true
+        
+        profileView.addSubview(myTabel)
+        myTabel.register(ProfileVCCell.self, forCellReuseIdentifier: "cell")
+        myTabel.delegate = self
+        myTabel.dataSource = self
+        myTabel.rowHeight = 80
+        myTabel.backgroundColor = .white
+        myTabel.layer.cornerRadius = 10
+        myTabel.layer.masksToBounds = true
+        myTabel.translatesAutoresizingMaskIntoConstraints = false
+        myTabel.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 225.0).isActive = true
+        myTabel.leftAnchor.constraint(equalTo: profileView.leftAnchor, constant: 20.0).isActive = true
+        myTabel.bottomAnchor.constraint(equalTo: profileView.bottomAnchor, constant: -80.0).isActive = true
+        myTabel.rightAnchor.constraint(equalTo: profileView.rightAnchor, constant: -20.0).isActive = true
+        
+        
+        
+        
+        lView.layer.cornerRadius = 20
+        lView.layer.shadowColor = UIColor.black.cgColor
+        lView.layer.shadowOpacity = 1
+        lView.layer.shadowOffset = .zero
+        lView.layer.shadowRadius = 5
+        lView.translatesAutoresizingMaskIntoConstraints = false
+        lView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200.0).isActive = true
+        lView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
+        lView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200.0).isActive = true
+        lView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
+        
+    }
+    
+    
+    
+}
 
-
-//extension UITableView {
-//    func setEmptyMasg(_ masg: String) {
-//        let masgLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-//        masgLabel.text = masg
-//        masgLabel.textColor = .black
-//        self.backgroundView = masgLabel
-////        self.separatorStyle = .none
-//    }
-//
-//    func restore() {
-//        myTabel.backgroundView = nil
-//        myTabel.separatorStyle = .singleLine
-//    }
-//
-//}
 
 
 

@@ -8,7 +8,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
     var categoryBranName: UILabel = {
         let categoryBranName = UILabel()
         categoryBranName.text = "F"
@@ -16,16 +16,16 @@ class TableViewCell: UITableViewCell {
         return categoryBranName
     }()
     
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-      super.init(style: style, reuseIdentifier: reuseIdentifier)
-      addSubview(categoryBranName)
-      
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(categoryBranName)
         
-      let cellFont = UIFont(name: categoryBranName.font.fontName, size: 17)
+        
+        let cellFont = UIFont(name: categoryBranName.font.fontName, size: 17)
         categoryBranName.font = cellFont
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,5 +35,5 @@ class TableViewCell: UITableViewCell {
         super.layoutSubviews()
         categoryBranName.frame = CGRect(x: 60, y: contentView.frame.size.height - 50, width: contentView.frame.width - 5, height: 20)
     }
-
+    
 }

@@ -12,17 +12,13 @@ import Firebase
 class SignUPVC: UIViewController {
     
     
-    let userImage = UIImageView()
-    let nameField = UITextField(frame: CGRect(x: 70, y: 350, width: 300, height: 40))
-    let emailField = UITextField(frame: CGRect(x: 70, y: 400, width: 300, height: 40))
-    let passField = UITextField(frame: CGRect(x: 70, y: 450, width: 300, height: 40))
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passField: UITextField!
+    @IBOutlet weak var signButton: UIButton!
     
-    let signButton = UIButton(frame: CGRect(x: 110, y: 600, width: 200, height: 50))
-    
-    let logLabel = UILabel(frame: CGRect(x: 70, y: 750, width: 200, height: 50))
-    let logButton = UIButton(frame: CGRect(x: 260, y: 750, width: 150, height: 50))
-    
-    let backButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 50))
     
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid
@@ -32,90 +28,48 @@ class SignUPVC: UIViewController {
     
     var usersArray = [User]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
         imagePicker.delegate = self
         
+        setUp()
+        
         hideKeyboardWhenTappedAround()
-        
-        view.addSubview(userImage)
-        view.addSubview(emailField)
-        view.addSubview(nameField)
-        view.addSubview(passField)
-        view.addSubview(signButton)
-        view.addSubview(logLabel)
-        view.addSubview(logButton)
-      
-        view.addSubview(backButton)
-        
-        userImage.frame = CGRect(x: 150, y: 200, width: 100, height: 100)
-        userImage.image = UIImage(systemName: "person")
-        userImage.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(addImage))
-        userImage.addGestureRecognizer(tap)
-        userImage.contentMode = .scaleAspectFill
-        userImage.layer.cornerRadius = userImage.frame.width/2
-        userImage.clipsToBounds = true
-        
-        nameField.placeholder = "الاسم"
-        nameField.backgroundColor = .lightText
-        nameField.textAlignment = .right
-        
-        emailField.placeholder = " البريد الالكتروني"
-        emailField.backgroundColor = .lightText
-        emailField.textAlignment = .right
-        
-        passField.placeholder = "  كلمة المرور"
-        passField.backgroundColor = .lightText
-        passField.isSecureTextEntry = true
-        passField.textAlignment = .right
-        
-        signButton.setTitle("سجل", for: .normal)
-        signButton.backgroundColor = .white
-        signButton.layer.cornerRadius = 10
-        signButton.setTitleColor(.blue, for: .normal)
-        signButton.addTarget(self, action: #selector(userSignUp), for: .touchUpInside)
-        
-        
-        logLabel.text = "لديك حساب بالفعل؟"
-        logLabel.textColor = .black
-        
-        logButton.setTitle("سجل الدخول", for: .normal)
-        logButton.setTitleColor(.blue, for: .normal)
-        logButton.addTarget(self, action: #selector(userLogIn), for: .touchUpInside)
-                
-        backButton.setTitleColor(.black, for: .normal)
-        backButton.setTitle("<", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "Helvetica", size: 30)
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+  
     }
     
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
+    
+    @IBAction func userSignUp(_ sender: Any) {
+        
+        if emailField.text != "" && passField.text != "" {
+        Auth.auth().createUser(withEmail: emailField.text!, password: passField.text!) { user, err in
+            if err == nil {
+                self.addNewUser(userId: (user?.user.uid)!)
+                self.performSegue(withIdentifier: "sign", sender: self)
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "tab") as! UITabBarController
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true, completion: nil)
+
+//                let vc = ProfileVc()
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true, completion: nil)
+            } else {
+                print("!!",err?.localizedDescription)
+                let alert = UIAlertController(title: "تنبيه", message: err?.localizedDescription, preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        } else {
+            let alert = UIAlertController(title: "البيانات غير مكتملة", message: "الرجاء التأكد من إدخال البريد الإلكتروني و كلمة المرور", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
-    @objc func userLogIn() {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Lvc") as! LoginVC
-//        vc.modalPresentationStyle = .fullScreen
-//        self.present(vc, animated: true, completion: nil)
-        let vc = LoginVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-    }
-    
-    @objc func userSignUp() {
-        check()
-        creatUser()
-//        addNewUser(userID: String)()
-//        let vc = TabBar()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
-    }
     
     func addNewUser(userId: String) {
 //        if userImage.image != UIImage(systemName: "person") {
@@ -127,7 +81,6 @@ class SignUPVC: UIViewController {
             "Email": self.emailField.text!,
             "UserImage": imageName
 //                userImage.image == UIImage(systemName: "person") ? "nil": imageName
-            
         ])
         { err in
             if err == nil {
@@ -141,43 +94,7 @@ class SignUPVC: UIViewController {
         }
     }
     
-    func creatUser() {
-        Auth.auth().createUser(withEmail: emailField.text!, password: passField.text!) { user, err in
-            if err == nil {
-                self.addNewUser(userId: (user?.user.uid)!)
-//                self.displayUserName()
-                let vc = ProfileVc()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
-            } else {
-                print("!!",err?.localizedDescription)
-                
-            }
-        }
-    }
-    
-    
-    
-    func check() {
-        if emailField.text == "" && passField.text == "" && nameField.text == "" {
-            let alert = UIAlertController(title: "missing info", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else if emailField.text == "" {
-            let alert = UIAlertController(title: "missing email", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else if passField.text == "" {
-            let alert = UIAlertController(title: "missing pass", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        else if nameField.text == "" {
-            let alert = UIAlertController(title: "missing name", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "حسناً", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+ 
 
     
     func uploadImage() {
@@ -200,19 +117,7 @@ class SignUPVC: UIViewController {
     }
     
     
-    
-//    func displayUserName() {
-//        let cRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-//        cRequest?.displayName = self.nameField.text
-//        cRequest?.commitChanges { (err) in
-//            if err == nil {
-//                print("display done")
-//                print(Auth.auth().currentUser?.displayName)
-//            } else {
-//                print(err)
-//            }
-//        }
-//    }
+ 
     
     func hideKeyboardWhenTappedAround() {
        
@@ -225,7 +130,10 @@ class SignUPVC: UIViewController {
       view.endEditing(true)
      }
     
+    
+    
 }
+
 
 
 extension SignUPVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -239,3 +147,50 @@ extension SignUPVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 }
 
 
+
+
+extension SignUPVC {
+    
+    func setUp() {
+        
+        view.addSubview(backView)
+        backView.layer.cornerRadius = 20
+        backView.layer.shadowColor = UIColor.black.cgColor
+        backView.layer.shadowOpacity = 1
+        backView.layer.shadowOffset = .zero
+        backView.layer.shadowRadius = 5
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.topAnchor.constraint(equalTo: view.topAnchor, constant: 170.0).isActive = true
+        backView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30.0).isActive = true
+        backView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -330.0).isActive = true
+        backView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30.0).isActive = true
+        
+        backView.addSubview(userImage)
+        userImage.translatesAutoresizingMaskIntoConstraints = false
+        userImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
+        userImage.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 130.0).isActive = true
+        userImage.widthAnchor.constraint(equalToConstant: 130.0).isActive = true
+        userImage.heightAnchor.constraint(equalToConstant: 130.0).isActive = true
+        userImage.image = UIImage(systemName: "person")
+        userImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addImage))
+        userImage.addGestureRecognizer(tap)
+        userImage.contentMode = .scaleAspectFill
+        userImage.layer.cornerRadius = userImage.frame.width/2
+        userImage.clipsToBounds = true
+        
+        
+        backView.addSubview(signButton)
+        signButton.layer.cornerRadius = 5
+        signButton.tintColor = UIColor(named: "Bu")
+        signButton.translatesAutoresizingMaskIntoConstraints = false
+        signButton.topAnchor.constraint(equalTo: backView.topAnchor, constant: 320.0).isActive = true
+        signButton.rightAnchor.constraint(equalTo: backView.rightAnchor, constant: -60.0).isActive = true
+        signButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        signButton.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
+       
+    }
+    
+    
+    
+}
